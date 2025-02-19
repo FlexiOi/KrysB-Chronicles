@@ -33,12 +33,10 @@ move_value = size_map / number_of_squares;
 
 // get move_x
 let move_x = rs.getPropertyValue('--move_x');
-let run_x = 0;
 move_x = move_x.replace("px", "");
 move_x_int = parseInt(move_x);
 
 // get move_y
 let move_y = rs.getPropertyValue('--move_y');
-let run_y = 0;
 move_y = move_y.replace("px", "");
 move_y_int = parseInt(move_y);

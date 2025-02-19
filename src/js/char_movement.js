@@ -1,11 +1,6 @@
  // local storage of player origin
  myStorage = localStorage;
 
-
- 
-
-
-
  /* Dieser Abschnitt ist noch veraltet und muss neu geschrieben werden
  
  // Square-Counter (Wo ist die Figur)
@@ -244,6 +239,8 @@
             break;
         case "ArrowRight":
             console.log("right works");
+            move_x_int = move_x_int + move_value
+            document.documentElement.style.setProperty("--move_x", move_x_int+"px");
             break;
      }
  }
