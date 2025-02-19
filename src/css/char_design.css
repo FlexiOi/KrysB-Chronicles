@@ -1,0 +1,20 @@
+:root
+{
+  --move_x:0px;
+  --move_y:0px;
+ 
+}
+
+.character1
+{
+height: 82px;
+width: 82px;
+position:absolute;   
+left:var(--move_x);
+top:var(--move_y);
+}
+
+.container {
+    position: relative;
+    
+  }
