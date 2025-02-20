@@ -226,21 +226,76 @@
  document.addEventListener("keydown", check_key);
 
  function check_key(e) {
-     switch (e.key) 
+    let pressedkey = e.key;
+     switch (pressedkey) 
      {
         case "ArrowUp":
-            console.log("up works");
+
+            direction = "negative"; 
+            document.getElementById('character1_ID').src = "src/images/cat_back_standing_black.png";
+            move_character1("y", move_y_int, "src/images/cat_back_moving_black.png", "src/images/cat_back_standing_black.png");
+            move_y_int = move_y_int - move_value;
             break;
+
         case "ArrowDown":
-            console.log("down works");
+
+            direction = "positive"
+            document.getElementById('character1_ID').src = "src/images/cat_front_standing_black.png";
+            move_character1("y", move_y_int, "src/images/cat_front_moving_black.png", "src/images/cat_front_standing_black.png");
+            move_y_int = move_y_int + move_value;
             break;
+
         case "ArrowLeft":
-            console.log("left works");
+
+            direction = "negative"; 
+            document.getElementById('character1_ID').src = "src/images/cat_left_standing_black.png";
+            move_character1("x", move_x_int, "src/images/cat_left_moving_black.png", "src/images/cat_left_standing_black.png");
+            move_x_int = move_x_int - move_value;
             break;
+
         case "ArrowRight":
-            console.log("right works");
-            move_x_int = move_x_int + move_value
-            document.documentElement.style.setProperty("--move_x", move_x_int+"px");
+            
+            direction = "positive"
+            document.getElementById('character1_ID').src = "src/images/cat_right_standing_black.png";
+            move_character1("x", move_x_int, "src/images/cat_right_moving_black.png", "src/images/cat_right_standing_black.png");
+            move_x_int = move_x_int + move_value;
             break;
      }
  }
+
+
+//move animation
+
+
+let delay_duration = 50;
+function delay(time) {
+    return new Promise(resolve => setTimeout(resolve, time));
+}
+
+async function move_character1(axis, position, moving_image, standing_image) {
+
+    let move_property = axis === "x" ? "--move_x" : "--move_y";
+    let intermediate_position = position;
+    let directionMultiplier = (direction === "positive") ? 1 : -1;
+    
+
+    // fluent motion part
+
+    intermediate_position = position + ((move_value / 3 )*directionMultiplier);
+
+    document.documentElement.style.setProperty(move_property, intermediate_position + "px");
+    document.getElementById("character1_ID").src = moving_image;
+
+    await delay(delay_duration);
+
+    intermediate_position = intermediate_position + ((move_value / 3 )*directionMultiplier);
+    document.documentElement.style.setProperty(move_property,  intermediate_position + "px");
+
+    await delay(delay_duration);
+
+    // back to standing still
+    intermediate_position = intermediate_position + ((move_value / 3 )*directionMultiplier);
+    
+    document.getElementById("character1_ID").src = standing_image;
+    document.documentElement.style.setProperty(move_property, intermediate_position + "px");
+}
