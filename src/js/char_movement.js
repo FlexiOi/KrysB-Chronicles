@@ -235,6 +235,7 @@
             document.getElementById('character1_ID').src = "src/images/cat_back_standing_black.png";
             move_character1("y", move_y_int, "src/images/cat_back_moving_black.png", "src/images/cat_back_standing_black.png");
             move_y_int = move_y_int - move_value;
+            console.log("x: "+move_x_int/move_value+" - y: "+move_y_int/move_value);
             break;
 
         case "ArrowDown":
@@ -243,6 +244,7 @@
             document.getElementById('character1_ID').src = "src/images/cat_front_standing_black.png";
             move_character1("y", move_y_int, "src/images/cat_front_moving_black.png", "src/images/cat_front_standing_black.png");
             move_y_int = move_y_int + move_value;
+            console.log("x: "+move_x_int/move_value+" - y: "+move_y_int/move_value);
             break;
 
         case "ArrowLeft":
@@ -251,6 +253,7 @@
             document.getElementById('character1_ID').src = "src/images/cat_left_standing_black.png";
             move_character1("x", move_x_int, "src/images/cat_left_moving_black.png", "src/images/cat_left_standing_black.png");
             move_x_int = move_x_int - move_value;
+            console.log("x: "+move_x_int/move_value+" - y: "+move_y_int/move_value);
             break;
 
         case "ArrowRight":
@@ -259,6 +262,7 @@
             document.getElementById('character1_ID').src = "src/images/cat_right_standing_black.png";
             move_character1("x", move_x_int, "src/images/cat_right_moving_black.png", "src/images/cat_right_standing_black.png");
             move_x_int = move_x_int + move_value;
+            console.log("x: "+move_x_int/move_value+" - y: "+move_y_int/move_value);
             break;
      }
  }
