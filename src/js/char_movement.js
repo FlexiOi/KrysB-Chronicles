@@ -221,49 +221,93 @@
  }
 
  */
-
+function show_position() {
+    console.log(move_x_int +" + "+move_y_int);
+}
 
  document.addEventListener("keydown", check_key);
 
  function check_key(e) {
+    
+        // defining contitions for movement
+
+        let xCondition = move_x_int / move_value;
+        let yCondition = move_y_int / move_value;
+
+
+    
+
+
     let pressedkey = e.key;
      switch (pressedkey) 
      {
         case "ArrowUp":
-
+            if (yCondition>0)
+            {
             direction = "negative"; 
             document.getElementById('character1_ID').src = "src/images/cat_back_standing_black.png";
             move_character1("y", move_y_int, "src/images/cat_back_moving_black.png", "src/images/cat_back_standing_black.png");
             move_y_int = move_y_int - move_value;
-            console.log("x: "+move_x_int/move_value+" - y: "+move_y_int/move_value);
+            yCondition--;
+            console.log("x: "+xCondition+" - y: "+yCondition);
             break;
-
+        }
+        else
+        {
+            console.log("out of bounds");
+            break;
+        }
         case "ArrowDown":
 
             direction = "positive"
+            if (yCondition<9) 
+        {
             document.getElementById('character1_ID').src = "src/images/cat_front_standing_black.png";
             move_character1("y", move_y_int, "src/images/cat_front_moving_black.png", "src/images/cat_front_standing_black.png");
             move_y_int = move_y_int + move_value;
-            console.log("x: "+move_x_int/move_value+" - y: "+move_y_int/move_value);
+            yCondition++;
+            console.log("x: "+xCondition+" - y: "+yCondition);
             break;
-
+        }
+        else
+        {
+            console.log("out of bounds");
+            break;
+        }
         case "ArrowLeft":
-
+            
+            if (xCondition>0) 
+        {
             direction = "negative"; 
             document.getElementById('character1_ID').src = "src/images/cat_left_standing_black.png";
             move_character1("x", move_x_int, "src/images/cat_left_moving_black.png", "src/images/cat_left_standing_black.png");
             move_x_int = move_x_int - move_value;
-            console.log("x: "+move_x_int/move_value+" - y: "+move_y_int/move_value);
+            xCondition--;
+            console.log("x: "+xCondition+" - y: "+yCondition);
             break;
-
+        }
+        else
+        {
+            console.log("out of bounds");
+            break;
+        }
         case "ArrowRight":
             
+            if ( xCondition<9) 
+        {
             direction = "positive"
             document.getElementById('character1_ID').src = "src/images/cat_right_standing_black.png";
             move_character1("x", move_x_int, "src/images/cat_right_moving_black.png", "src/images/cat_right_standing_black.png");
             move_x_int = move_x_int + move_value;
-            console.log("x: "+move_x_int/move_value+" - y: "+move_y_int/move_value);
+            xCondition++;
+            console.log("x: "+xCondition+" - y: "+yCondition);
             break;
+        }
+        else
+        {
+            console.log("out of bounds");
+            break;
+        }
      }
  }
 
