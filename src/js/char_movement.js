@@ -221,46 +221,75 @@
  }
 
  */
-function show_position() {
-    console.log(move_x_int +" + "+move_y_int);
-}
 
- document.addEventListener("keydown", check_key);
+
+// button press and move character depending on ArrowKey and checking bounds
+
+document.addEventListener("keydown", check_key);
 
  function check_key(e) {
     
         // defining contitions for movement
 
-        let xCondition = move_x_int / move_value;
-        let yCondition = move_y_int / move_value;
+        let xCondition = (move_x_int / move_value)+1;
+        let yCondition = (move_y_int / move_value)+1;
+        let bannedSquaresCheck = false;
 
-
-    
 
 
     let pressedkey = e.key;
      switch (pressedkey) 
-     {
+{
         case "ArrowUp":
-            if (yCondition>0)
+
+            if (yCondition>1)
+    {
+            for (let i = 1; i <= map1_bannedSquares.length; i++)
+        {
+            if ((xCondition) == map1_bannedSquares[i-1].x && (yCondition-1) == map1_bannedSquares[i-1].y) 
             {
+                console.log("collision with banned square");
+                i =map1_bannedSquares.length;
+                bannedSquaresCheck = true;  
+            }
+           else{
+            console.log("clear path");
+            bannedSquaresCheck = false;
+           }
+        }
+
+        if (yCondition>1 && bannedSquaresCheck==false) 
+            
+            {
+            
             direction = "negative"; 
             document.getElementById('character1_ID').src = "src/images/cat_back_standing_black.png";
             move_character1("y", move_y_int, "src/images/cat_back_moving_black.png", "src/images/cat_back_standing_black.png");
             move_y_int = move_y_int - move_value;
             yCondition--;
             console.log("x: "+xCondition+" - y: "+yCondition);
-            break;
-        }
+            
+            }
+            
         else
-        {
-            console.log("out of bounds");
+                {
+            console.log("out of bounds / cant move on banned square");
+            bannedSquaresCheck==false;
             break;
-        }
+                }
+        
+        
+        break;
+    }
+            else
+                        {
+                console.log("out of bounds");
+                break;
+                        }
         case "ArrowDown":
 
             direction = "positive"
-            if (yCondition<9) 
+            if (yCondition<10) 
         {
             document.getElementById('character1_ID').src = "src/images/cat_front_standing_black.png";
             move_character1("y", move_y_int, "src/images/cat_front_moving_black.png", "src/images/cat_front_standing_black.png");
@@ -276,7 +305,7 @@ function show_position() {
         }
         case "ArrowLeft":
             
-            if (xCondition>0) 
+            if (xCondition>1) 
         {
             direction = "negative"; 
             document.getElementById('character1_ID').src = "src/images/cat_left_standing_black.png";
@@ -293,7 +322,7 @@ function show_position() {
         }
         case "ArrowRight":
             
-            if ( xCondition<9) 
+            if ( xCondition<10) 
         {
             direction = "positive"
             document.getElementById('character1_ID').src = "src/images/cat_right_standing_black.png";
