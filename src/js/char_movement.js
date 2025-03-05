@@ -244,9 +244,9 @@ document.addEventListener("keydown", check_key);
 
             if (yCondition>1)
     {
-            for (let i = 1; i <= map1_bannedSquares.length; i++)
+            for (let i = 0; i < map1_bannedSquares.length; i++)
         {
-            if ((xCondition) == map1_bannedSquares[i-1].x && (yCondition-1) == map1_bannedSquares[i-1].y) 
+            if ((xCondition) == map1_bannedSquares[i].x && (yCondition-1) == map1_bannedSquares[i].y) 
             {
                 console.log("collision with banned square");
                 i =map1_bannedSquares.length;
@@ -288,40 +288,146 @@ document.addEventListener("keydown", check_key);
                         }
         case "ArrowDown":
 
-            direction = "positive"
-            if (yCondition<10) 
-        {
-            document.getElementById('character1_ID').src = "src/images/cat_front_standing_black.png";
-            move_character1("y", move_y_int, "src/images/cat_front_moving_black.png", "src/images/cat_front_standing_black.png");
-            move_y_int = move_y_int + move_value;
-            yCondition++;
-            console.log("x: "+xCondition+" - y: "+yCondition);
-            break;
-        }
-        else
-        {
-            console.log("out of bounds");
-            break;
-        }
+        if (yCondition<10)
+            {
+                    for (let i = 0; i < map1_bannedSquares.length; i++)
+                {
+                    if ((xCondition) == map1_bannedSquares[i].x && (yCondition+1) == map1_bannedSquares[i].y) 
+                    {
+                        console.log("collision with banned square");
+                        i =map1_bannedSquares.length;
+                        bannedSquaresCheck = true;  
+                    }
+                   else{
+                    console.log("clear path");
+                    bannedSquaresCheck = false;
+                   }
+                }
+        
+                if (yCondition<10 && bannedSquaresCheck==false) 
+                    
+                    {
+                    
+                    direction = "positive"; 
+                    document.getElementById('character1_ID').src = "src/images/cat_back_standing_black.png";
+                    move_character1("y", move_y_int, "src/images/cat_front_moving_black.png", "src/images/cat_front_standing_black.png");
+                    move_y_int = move_y_int + move_value;
+                    yCondition++;
+                    console.log("x: "+xCondition+" - y: "+yCondition);
+                    
+                    }
+                    
+                else
+                        {
+                    console.log("out of bounds / cant move on banned square");
+                    bannedSquaresCheck==false;
+                    break;
+                        }
+                
+                
+                break;
+            }
+                    else
+                                {
+                        console.log("out of bounds");
+                        break;
+                                }
+
         case "ArrowLeft":
-            
-            if (xCondition>1) 
-        {
-            direction = "negative"; 
-            document.getElementById('character1_ID').src = "src/images/cat_left_standing_black.png";
-            move_character1("x", move_x_int, "src/images/cat_left_moving_black.png", "src/images/cat_left_standing_black.png");
-            move_x_int = move_x_int - move_value;
-            xCondition--;
-            console.log("x: "+xCondition+" - y: "+yCondition);
-            break;
-        }
-        else
-        {
-            console.log("out of bounds");
-            break;
-        }
+
+        if (xCondition>1)
+            {
+                    for (let i = 0; i < map1_bannedSquares.length; i++)
+                {
+                    if ((xCondition-1) == map1_bannedSquares[i].x && (yCondition) == map1_bannedSquares[i].y) 
+                    {
+                        console.log("collision with banned square");
+                        i =map1_bannedSquares.length;
+                        bannedSquaresCheck = true;  
+                    }
+                   else{
+                    console.log("clear path");
+                    bannedSquaresCheck = false;
+                   }
+                }
+        
+                if (xCondition>1 && bannedSquaresCheck==false) 
+                    
+                    {
+                    
+                    direction = "negative"; 
+                    document.getElementById('character1_ID').src = "src/images/cat_back_standing_black.png";
+                    move_character1("x", move_x_int, "src/images/cat_left_moving_black.png", "src/images/cat_left_standing_black.png");
+                    move_x_int = move_x_int - move_value;
+                    xCondition--;
+                    console.log("x: "+xCondition+" - y: "+yCondition);
+                    
+                    }
+                    
+                else
+                        {
+                    console.log("out of bounds / cant move on banned square");
+                    bannedSquaresCheck==false;
+                    break;
+                        }
+                
+                
+                break;
+            }
+                    else
+                                {
+                        console.log("out of bounds");
+                        break;
+                                }
+     
         case "ArrowRight":
+            if (xCondition<10)
+                {
+                        for (let i = 0; i < map1_bannedSquares.length; i++)
+                    {
+                        if ((xCondition+1) == map1_bannedSquares[i].x && (yCondition) == map1_bannedSquares[i].y) 
+                        {
+                            console.log("collision with banned square");
+                            i =map1_bannedSquares.length;
+                            bannedSquaresCheck = true;  
+                        }
+                       else{
+                        console.log("clear path");
+                        bannedSquaresCheck = false;
+                       }
+                    }
             
+                    if (xCondition<10 && bannedSquaresCheck==false) 
+                        
+                        {
+                        
+                        direction = "positive"; 
+                        document.getElementById('character1_ID').src = "src/images/cat_back_standing_black.png";
+                        move_character1("x", move_x_int, "src/images/cat_right_moving_black.png", "src/images/cat_right_standing_black.png");
+                        move_x_int = move_x_int + move_value;
+                        xCondition++;
+                        console.log("x: "+xCondition+" - y: "+yCondition);
+                        
+                        }
+                        
+                    else
+                            {
+                        console.log("out of bounds / cant move on banned square");
+                        bannedSquaresCheck==false;
+                        break;
+                            }
+                    
+                    
+                    break;
+                }
+                        else
+                                    {
+                            console.log("out of bounds");
+                            break;
+                                    }
+         
+/*
+
             if ( xCondition<10) 
         {
             direction = "positive"
@@ -337,7 +443,9 @@ document.addEventListener("keydown", check_key);
             console.log("out of bounds");
             break;
         }
+            */
      }
+        
  }
 
 
